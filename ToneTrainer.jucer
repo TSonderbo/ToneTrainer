@@ -4,6 +4,16 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="Gy75ly" name="ToneTrainer">
     <GROUP id="{A95EB7FE-A89B-57A3-7E77-9060A03BCFAE}" name="Source">
+      <GROUP id="{9D3BB2C6-67AC-5DDD-895B-7D3C97D553ED}" name="Util">
+        <FILE id="NMs7zL" name="AudioBufferQueue.cpp" compile="1" resource="0"
+              file="Source/AudioBufferQueue.cpp"/>
+        <FILE id="WB45kD" name="AudioBufferQueue.h" compile="0" resource="0"
+              file="Source/AudioBufferQueue.h"/>
+        <FILE id="CDRYVC" name="ScopeDataCollector.cpp" compile="1" resource="0"
+              file="Source/ScopeDataCollector.cpp"/>
+        <FILE id="RcErIX" name="ScopeDataCollector.h" compile="0" resource="0"
+              file="Source/ScopeDataCollector.h"/>
+      </GROUP>
       <GROUP id="{FBED015A-7633-8C0D-65C4-2AEBA443B9D7}" name="Pitch Detection">
         <FILE id="cHvyop" name="PitchDetector.cpp" compile="1" resource="0"
               file="Source/PitchDetector.cpp"/>
