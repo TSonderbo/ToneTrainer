@@ -15,8 +15,10 @@
 class Yin
 {
 public:
+
     void prepareToPlay(double sampleRate, double minFreq, double maxFreq);
-    float estimatePitch(juce::AudioBuffer<float>& audioBuffer, float threshold);
+
+    std::tuple<float, float> estimatePitch(std::vector<float>& audioBuffer, float threshold);
 private:
 
     bool isPrepared = false;
@@ -29,5 +31,5 @@ private:
     double sampleRate;
 
     void DF();
-    float CMNDF(float threshold);
+    std::tuple<float, float> CMNDF(float threshold);
 };

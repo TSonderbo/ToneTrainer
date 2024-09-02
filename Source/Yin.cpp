@@ -12,25 +12,25 @@
 
 void Yin::prepareToPlay(double sampleRate, double minFreq, double maxFreq)
 {
+	this->sampleRate = sampleRate;
 	tau_min = static_cast<int>(sampleRate / maxFreq);
 	tau_max = static_cast<int>(sampleRate / minFreq);
-
-	this->sampleRate = sampleRate;
 	isPrepared = true;
 }
 
-float Yin::estimatePitch(juce::AudioBuffer<float>& audioBuffer, float threshold)
+/*
+	returns pitch estimate, confidence value
+*/
+std::tuple<float, float> Yin::estimatePitch(std::vector<float>& audioBuffer, float threshold)
 {
 	if (isPrepared == false)
 	{
-		return 0;
+		return std::make_tuple(0,0);
 	}
 
-	const float* start = audioBuffer.getReadPointer(0);
-	int size = audioBuffer.getNumSamples();
-	buffer = std::vector<float>(start, start + size);
+	buffer = audioBuffer;
 
-	windowSize = static_cast<int>(audioBuffer.getNumSamples() / 2);
+	windowSize = static_cast<int>(buffer.size() / 2);
 
 	if (tau_max > windowSize)
 	{
@@ -58,7 +58,10 @@ void Yin::DF()
 	}
 }
 
-float Yin::CMNDF(float threshold)
+/*
+	returns pitch estimate, confidence value
+*/
+std::tuple<float, float> Yin::CMNDF(float threshold)
 {
 	DF();
 
@@ -73,7 +76,7 @@ float Yin::CMNDF(float threshold)
 
 		if (yinBuffer[tau - tau_min] < threshold)
 		{
-			return sampleRate / tau;
+			return std::make_tuple(sampleRate / tau, yinBuffer[tau - tau_min]);
 		}
 		if (yinBuffer[tau - tau_min] < min)
 		{
@@ -82,5 +85,5 @@ float Yin::CMNDF(float threshold)
 		}
 	}
 
-	return sampleRate / minArg;
+	return std::make_tuple(sampleRate / minArg, min);
 }
