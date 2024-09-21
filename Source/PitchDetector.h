@@ -11,20 +11,30 @@
 #pragma once
 #include "JuceHeader.h"
 #include "Yin.h"
+#include "AudioBufferQueue.h"
+#include "NoteFrequencies.h"
+
+struct Estimate
+{
+    float pitch;
+    juce::String note;
+    float confidence;
+};
 
 class PitchDetector
 {
 public:
-
-    void prepareToPlay(double sampleRate, double minFreq, double maxFreq, double bufferSize);
-    void estimatePitch();
-    juce::String estimateNote();
-
-    double getPitch();
+    PitchDetector(AudioBufferQueue& queueToUse);
+    void prepareToPlay(double sampleRate, double minFreq, double maxFreq);
+    Estimate estimatePitch();
 
 private:
-
-
-    juce::AudioBuffer<float> buffer;
+    std::vector<float> buffer;
+    double sampleRate;
+    AudioBufferQueue& audioBufferQueue;
     Yin yin;
+    std::vector<float> sampleData;
+
+    juce::String calculateNote(float freq);
+    bool isNote(float input, float target);
 };

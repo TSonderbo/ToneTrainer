@@ -13,6 +13,8 @@
               file="Source/ScopeDataCollector.cpp"/>
         <FILE id="RcErIX" name="ScopeDataCollector.h" compile="0" resource="0"
               file="Source/ScopeDataCollector.h"/>
+        <FILE id="wMI6iQ" name="NoteFrequencies.h" compile="0" resource="0"
+              file="Source/NoteFrequencies.h"/>
       </GROUP>
       <GROUP id="{FBED015A-7633-8C0D-65C4-2AEBA443B9D7}" name="Pitch Detection">
         <FILE id="cHvyop" name="PitchDetector.cpp" compile="1" resource="0"
